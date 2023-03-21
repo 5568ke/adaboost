@@ -1,14 +1,8 @@
-#include<iostream>
-class spot{
+#include <iostream>
+#include "spot.h"
 
-public:
-  spot(float X,float Y) : x(X),y(Y)
-  {}
-  void Print_me(){
-    std::cout<<" x : "<<x<<" y : "<<y<<std::endl;
-  }
+spot::spot(float X,float Y) : x(X),y(Y) {}
 
-public:
-  const float x;
-  const float y;
-};
+void spot::Print_me(){
+  std::cout<<" x : "<<x<<" y : "<<y<<std::endl;
+}

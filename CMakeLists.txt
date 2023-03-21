@@ -10,11 +10,11 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 
 add_executable(train
-    ./src/main.cpp
-    ./src/spot.cpp
+    ./include/segment.h
     ./src/segment.cpp
     ./include/spot.h
-    ./include/segment.h
+    ./src/spot.cpp
+    ./src/main.cpp
 )
 
 

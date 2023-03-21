@@ -1,8 +1,9 @@
-#include<fstream>
-#include<cmath>
-#include<vector>
-#include<iostream>
-#include"segment.h"
+#include <fstream>
+#include <cmath>
+#include <vector>
+#include <iostream>
+#include "segment.h"
+#include "spot.h"
 
 std::vector<segment> load_data(){
   // 720 * 2   x , y

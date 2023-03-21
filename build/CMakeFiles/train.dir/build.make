@@ -57,18 +57,18 @@ include CMakeFiles/train.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/train.dir/flags.make
 
-CMakeFiles/train.dir/src/main.cpp.o: CMakeFiles/train.dir/flags.make
-CMakeFiles/train.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/train.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/train.dir/src/main.cpp.o -c /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp
+CMakeFiles/train.dir/src/segment.cpp.o: CMakeFiles/train.dir/flags.make
+CMakeFiles/train.dir/src/segment.cpp.o: ../src/segment.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/train.dir/src/segment.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/train.dir/src/segment.cpp.o -c /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp
 
-CMakeFiles/train.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/train.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp > CMakeFiles/train.dir/src/main.cpp.i
+CMakeFiles/train.dir/src/segment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/train.dir/src/segment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp > CMakeFiles/train.dir/src/segment.cpp.i
 
-CMakeFiles/train.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/train.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp -o CMakeFiles/train.dir/src/main.cpp.s
+CMakeFiles/train.dir/src/segment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/train.dir/src/segment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp -o CMakeFiles/train.dir/src/segment.cpp.s
 
 CMakeFiles/train.dir/src/spot.cpp.o: CMakeFiles/train.dir/flags.make
 CMakeFiles/train.dir/src/spot.cpp.o: ../src/spot.cpp
@@ -83,31 +83,31 @@ CMakeFiles/train.dir/src/spot.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/train.dir/src/spot.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/spot.cpp -o CMakeFiles/train.dir/src/spot.cpp.s
 
-CMakeFiles/train.dir/src/segment.cpp.o: CMakeFiles/train.dir/flags.make
-CMakeFiles/train.dir/src/segment.cpp.o: ../src/segment.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/train.dir/src/segment.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/train.dir/src/segment.cpp.o -c /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp
+CMakeFiles/train.dir/src/main.cpp.o: CMakeFiles/train.dir/flags.make
+CMakeFiles/train.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/train.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/train.dir/src/main.cpp.o -c /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp
 
-CMakeFiles/train.dir/src/segment.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/train.dir/src/segment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp > CMakeFiles/train.dir/src/segment.cpp.i
+CMakeFiles/train.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/train.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp > CMakeFiles/train.dir/src/main.cpp.i
 
-CMakeFiles/train.dir/src/segment.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/train.dir/src/segment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp -o CMakeFiles/train.dir/src/segment.cpp.s
+CMakeFiles/train.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/train.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp -o CMakeFiles/train.dir/src/main.cpp.s
 
 # Object files for target train
 train_OBJECTS = \
-"CMakeFiles/train.dir/src/main.cpp.o" \
+"CMakeFiles/train.dir/src/segment.cpp.o" \
 "CMakeFiles/train.dir/src/spot.cpp.o" \
-"CMakeFiles/train.dir/src/segment.cpp.o"
+"CMakeFiles/train.dir/src/main.cpp.o"
 
 # External object files for target train
 train_EXTERNAL_OBJECTS =
 
-train: CMakeFiles/train.dir/src/main.cpp.o
-train: CMakeFiles/train.dir/src/spot.cpp.o
 train: CMakeFiles/train.dir/src/segment.cpp.o
+train: CMakeFiles/train.dir/src/spot.cpp.o
+train: CMakeFiles/train.dir/src/main.cpp.o
 train: CMakeFiles/train.dir/build.make
 train: CMakeFiles/train.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable train"

@@ -1,5 +1,5 @@
-#include"segment.h"
-#include<cmath>
+#include "segment.h"
+#include <cmath>
 
 
 template<typename Model>

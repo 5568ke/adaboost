@@ -1,13 +1,15 @@
-#include"spot.h"
-#include<vector>
+#ifndef _SEGMENT_H
+#define _SEGMENT_H
+
+#include "spot.h"
+#include <vector>
 
 class segment{
-  
 
 public:
 
   segment(std::vector<spot>&& spots);
-  void Caculate_features(){};
+  void Caculate_features();
   void Print_me();
 
 private:
@@ -26,3 +28,5 @@ private:
   void caculate_circularity();
   void caculate_radius();
 };
+
+#endif

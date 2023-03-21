@@ -5,8 +5,10 @@ CMakeFiles/train.dir/src/main.cpp.o: ../include/segment.h
 CMakeFiles/train.dir/src/main.cpp.o: ../include/spot.h
 CMakeFiles/train.dir/src/main.cpp.o: ../src/main.cpp
 
+CMakeFiles/train.dir/src/segment.cpp.o: ../include/segment.h
 CMakeFiles/train.dir/src/segment.cpp.o: ../include/spot.h
 CMakeFiles/train.dir/src/segment.cpp.o: ../src/segment.cpp
 
+CMakeFiles/train.dir/src/spot.cpp.o: ../include/spot.h
 CMakeFiles/train.dir/src/spot.cpp.o: ../src/spot.cpp
 
