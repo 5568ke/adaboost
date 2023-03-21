@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/segment.h
+spot.h
+../include/spot.h
+vector
+-
+
+../include/spot.h
+
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp
+fstream
+-
+cmath
+-
+vector
+-
+iostream
+-
+segment.h
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.h
+
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp
+vector
+-
+iostream
+-
+math.h
+-
+spot.h
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/spot.h
+
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/spot.cpp
+iostream
+-
+
