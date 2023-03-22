@@ -17,10 +17,10 @@ private:
   std::vector<spot> _spots;
 
   int _spots_number;
-  float _standard_deviation;
-  float _width;
-  float _circularity;
-  float _radius;
+  double _standard_deviation;
+  double _width;
+  double _circularity;
+  double _radius;
 
 private:
   void caculate_standard_deviation();

@@ -28,15 +28,3 @@ segment.h
 spot.h
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/spot.h
 
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp
-vector
--
-iostream
--
-math.h
--
-spot.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/spot.h
-segment.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.h
-

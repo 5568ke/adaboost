@@ -3,10 +3,10 @@
 
 class spot{
 public:
-  spot(float x,float y);
+  spot(double x,double y);
   void Print_me();
-  const int x;
-  const int y;
+  const double x;
+  const double y;
 };
 
 #endif
