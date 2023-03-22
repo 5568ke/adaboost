@@ -8,9 +8,13 @@ class segment{
 
 public:
 
-  segment(std::vector<spot>&& spots);
+  segment(std::vector<spot>&&);
   void Caculate_features();
   void Print_me();
+  void Modify_weight(double,int);
+
+public:
+  int Is_feet;   // 1 : is feet    ,     -1 : not feet
 
 private:
 
@@ -21,6 +25,8 @@ private:
   double _width;
   double _circularity;
   double _radius;
+  double _weight;
+  
 
 private:
   void caculate_standard_deviation();

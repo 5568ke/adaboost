@@ -20,6 +20,13 @@ void segment::Caculate_features(){
 void segment::Print_me(){
   for(auto& spot : _spots)
     spot.Print_me();
+  std::cout<<"is feet : "<<Is_feet;
+  std::cout<<std::endl<<std::endl;
+}
+
+void segment::Modify_weight(double Alpha , int Predict_result){
+  double offset = exp(Alpha) * Predict_result * Is_feet; 
+  _weight *= 1+offset; 
 }
 
 void segment::caculate_standard_deviation(){
