@@ -31,8 +31,7 @@ private:
 private:
   void caculate_standard_deviation();
   void caculate_width();
-  void caculate_circularity();
-  void caculate_radius();
+  void caculate_circularity_and_radius();
 };
 
 #endif

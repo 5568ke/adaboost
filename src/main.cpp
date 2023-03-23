@@ -2,9 +2,9 @@
 #include <cmath>
 #include <vector>
 #include <iostream>
-#include "segment.h"
-#include "spot.h"
-#include "Label.h"
+#include "../include/segment.h"
+#include "../include/spot.h"
+#include "../include/Label.h"
 
 std::vector<segment> load_data(){
   std::ifstream xy_data;

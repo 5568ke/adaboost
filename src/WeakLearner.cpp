@@ -1,7 +1,7 @@
 #include <string>
 #include <utility>
 #include <cmath>
-#include "segment.h"
+#include "../include/segment.h"
 
 
 template<typename Model>
@@ -25,6 +25,12 @@ public:
     Amount_of_say=_alpha;
     modify_data_weight(Segments,std::move(res.second),_alpha);
   }
+  
+  int Predict_if_is_feet(const segment& Seg){
+    // predict is feet  : return 1
+    // preidct not feet : return -1
+    return _model.Predict(Seg);     
+  }
 
 
 private:
@@ -33,7 +39,7 @@ private:
   Model _model;
 
 private:
-  modify_data_weight(std::vector<segment>& Segments,std::vector<int>&& Predict_result){
+  void modify_data_weight(std::vector<segment>& Segments,std::vector<int>&& Predict_result){
     for(int index{};index<Segments.size();index++)
       Segments[index].Modify_weight(_alpha,Predict_result[index]);
   }

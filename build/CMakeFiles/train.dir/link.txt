@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native  -rdynamic CMakeFiles/train.dir/src/segment.cpp.o CMakeFiles/train.dir/src/spot.cpp.o CMakeFiles/train.dir/src/main.cpp.o  -o train 
