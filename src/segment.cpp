@@ -27,6 +27,10 @@ const double segment::Get_feature(std::string Feature_type) const{
   if(Feature_type=="radius") return _radius;
 }
 
+const double segment::Get_weight() const{
+  return _weight;
+}
+
 void segment::Print_me(){
   // for(auto& spot : _spots)
     // spot.Print_me();

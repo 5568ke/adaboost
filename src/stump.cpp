@@ -26,17 +26,20 @@ std::pair<double,std::vector<int>> stump::Train(const std::vector<segment>& segm
 }
 
 int stump::Predict(const segment&){
+  
 
 };
 
 void stump::try_point(double Critical_point , const std::vector<segment>& segments){
-  double t_error_rate{};
+  double t_error_rate{},weight_sum{},correct_sum{};
   const size_t segments_number=segments.size();
+  _critical_point=Critical_point;
   for(size_t index{};index<segments_number;index++){
-    //...
-    //...
-    //...
+    double t_weight=segments[index].Get_weight();
+    weight_sum+= t_weight;
+    correct_sum+= Predict(segments[index]) * segments[index].Is_feet * t_weight;
   }
+  t_error_rate = correct_sum / weight_sum;
   if(t_error_rate < _min_error_rate){
     _min_error_rate=t_error_rate;
     _critical_point=Critical_point;

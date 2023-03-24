@@ -14,6 +14,7 @@ public:
   void Print_me();
   void Normolized(double);
   double Modify_weight(double,int);
+  const double Get_weight() const;
   const double Get_feature(std::string) const;
   
 

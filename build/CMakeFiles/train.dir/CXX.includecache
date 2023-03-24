@@ -1748,13 +1748,37 @@ IndexedViewMethods.h
 ReshapedMethods.h
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/ThirdParty/Eigen/src/plugins/ReshapedMethods.h
 
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/Label.h
+vector
+-
+segment.h
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
+
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
 spot.h
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/spot.h
+string
+-
 vector
 -
 
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/spot.h
+
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp
+fstream
+-
+cmath
+-
+vector
+-
+iostream
+-
+../include/segment.h
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
+../include/spot.h
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/spot.h
+../include/Label.h
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/Label.h
 
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/segment.cpp
 vector
