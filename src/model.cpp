@@ -6,4 +6,4 @@
 
 
 model::model(std::string FeatureType)
-:_feature_type(FeatureType)
+:_feature_type(FeatureType) {}

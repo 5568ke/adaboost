@@ -6,33 +6,56 @@
 #include "../include/segment.h"
 
 segment::segment(std::vector<spot>&& Spots) 
+: _spots_number(Spots.size()) , _spots(std::move(Spots))
 {
-  _spots_number = Spots.size();
-  _spots = std::move(Spots);
+  // _spots_number = Spots.size();
+  // _spots = std::move(Spots);
   Caculate_features();
 }
 
 void segment::Caculate_features(){
-  // Print_me();
   caculate_standard_deviation();
   caculate_width();
   caculate_circularity_and_radius();
 }
 
+const double segment::Get_feature(std::string Feature_type) const{
+  if(Feature_type=="spots_number") return _spots_number;
+  if(Feature_type=="stand_deviation") return _standard_deviation;
+  if(Feature_type=="width") return _width;
+  if(Feature_type=="circularity") return _circularity;
+  if(Feature_type=="radius") return _radius;
+}
+
 void segment::Print_me(){
-  for(auto& spot : _spots)
-    spot.Print_me();
-  std::cout<<"is feet : "<<Is_feet;
+  // for(auto& spot : _spots)
+    // spot.Print_me();
+  std::cout<<"is feet : "<<Is_feet<<std::endl;
+  std::cout<<"spots_number : "<<_spots_number<<std::endl;
+  std::cout<<"stand_deviation : "<<_standard_deviation<<std::endl;
+  std::cout<<"width : "<<_width<<std::endl;
+  std::cout<<"circularity : "<<_circularity<<std::endl;
+  std::cout<<"radius : "<<_radius<<std::endl;
+
   std::cout<<std::endl<<std::endl;
 }
 
-void segment::Modify_weight(double Alpha , int Predict_result){
+double segment::Modify_weight(double Alpha , int Predict_result){
   double offset = exp(Alpha) * Predict_result * Is_feet; 
   _weight *= 1+offset; 
+  return 1+offset;
+}
+
+void segment::Normolized(double Weight_sum){
+  _weight/=Weight_sum;
 }
 
 void segment::caculate_standard_deviation(){
-  float mean_x,mean_y,square_diff_sum=0;
+  if(_spots_number==1){
+    _standard_deviation=0;
+    return;
+  }
+  float mean_x{},mean_y{},square_diff_sum{};
   for(const auto& spot : _spots){
     mean_x+=spot.x;
     mean_y+=spot.y;
@@ -43,7 +66,7 @@ void segment::caculate_standard_deviation(){
     square_diff_sum += (spot.x - mean_x) * (spot.x - mean_x) + (spot.y - mean_y) * (spot.y - mean_y);
   }
   square_diff_sum /= _spots_number;
-  _standard_deviation=sqrt(square_diff_sum);
+  _standard_deviation=std::sqrt(square_diff_sum);
 }
 
 void segment::caculate_width(){
@@ -55,15 +78,11 @@ void segment::caculate_width(){
 void segment::caculate_circularity_and_radius(){
   Eigen::MatrixXd a(_spots_number,3);
   Eigen::VectorXd b(_spots_number);
-  std::cout<<_spots_number<<std::endl;
   for(int index{};index<_spots_number;index++){
-    // std::cout<<_spots[index].x<<" "<<_spots[index].y<<std::endl;
     a(index,0)=-2*_spots[index].x;
     a(index,1)=-2*_spots[index].y;
     a(index,2)=1;
-    // a << -2*_spots[index].x , -2*_spots[index].y ,1;
     b(index) = -pow(_spots[index].x,2)-pow(_spots[index].y,2);
-    // b << -pow(_spots[index].x,2)-pow(_spots[index].y,2);
   }
   Eigen::MatrixXd result((a.transpose()*a).inverse()*(a.transpose())*b);
   double center_x_pos{result(0,0)},center_y_pos{result(1,0)};

@@ -19,7 +19,7 @@ public:
   void train(std::vector<segment>& Segments,std::string Feature){
     //res.first : prediect error rate
     //res.second : vector of predict result , vector[i]=1 means Segments[i] been predict as feet, vector[i]=-1 means not feet;
-    auto res= _model.Caculate_error_rate(Segments,Feature);               
+    auto res= _model.Train(Segments,Feature);               
     _error_rate = res.first; 
     _alpha = 0.5 * log( (1-_error_rate) / _error_rate );
     Amount_of_say=_alpha;
@@ -39,8 +39,12 @@ private:
   Model _model;
 
 private:
-  void modify_data_weight(std::vector<segment>& Segments,std::vector<int>&& Predict_result){
+  void update_data_weight(std::vector<segment>& Segments,std::vector<int>&& Predict_result){
+    // update data weight
+    double weight_sum=0;
     for(int index{};index<Segments.size();index++)
-      Segments[index].Modify_weight(_alpha,Predict_result[index]);
+      weight_sum+=Segments[index].Modify_weight(_alpha,Predict_result[index]);
+    for(int index{};index<Segments.size();index++)
+      Segments[index].Normolized(weight_sum);
   }
 };

@@ -17,9 +17,8 @@ std::vector<segment> load_data(){
   const double threshold=0.1;   //to be revised
   std::vector<segment> segments;
   std::vector<std::vector<segment>> temp_segments;    // this vector contains all segment in this round of datamain
-  temp_segments.resize(120);
-  for(int round{};round<120;round++){
-
+  temp_segments.resize(1);
+  for(int round{};round<1;round++){
     std::vector<spot> single_segment;
     std::vector<spot> valid_spots;
     double x,y;
@@ -49,18 +48,16 @@ std::vector<segment> load_data(){
   xy_data.close();
 
   //mark if segment is feet
-  for(int round{};round<60;round++){
+  for(int round{};round<1;round++){
     std::vector<int> label_data=Label(round+1,temp_segments[round]); 
-    for(int index{};index<label_data.size();index++){
+    for(int index{};index<label_data.size();index++)
       temp_segments[round][index].Is_feet=label_data[index];
-    }
   }
 
   //store all segments in to a one-dimension vector
-  for(int round{};round<60;round++){
+  for(int round{};round<1;round++)
     for(int index{};index<temp_segments[round].size();index++)
       segments.push_back(std::move(temp_segments[round][index]));
-  }
 
   return segments;
 }
@@ -70,5 +67,6 @@ int main(){
 
   // load all segment's data in to vector
   std::vector<segment> segments = load_data(); 
+
 
 }
