@@ -3,8 +3,11 @@
 
 CMakeFiles/train.dir/src/main.cpp.o
  /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/Label.h
+ /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/model.h
  /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
  /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/spot.h
+ /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/stump.h
+ /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/WeakLearner.h
  /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp
 CMakeFiles/train.dir/src/segment.cpp.o
  ../ThirdParty/Eigen/src/Core/arch/HIP/hcc/math_constants.h
