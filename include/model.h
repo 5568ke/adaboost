@@ -11,7 +11,7 @@ public:
   virtual std::pair<double,std::vector<int>> Train(const std::vector<segment>&);
   virtual int Predict(const segment&);
 
-private:
+protected:
   std::string _feature_type;
 };
 #endif // !_MODEL_H

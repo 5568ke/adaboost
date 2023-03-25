@@ -8,8 +8,6 @@
 segment::segment(std::vector<spot>&& Spots) 
 : _spots_number(Spots.size()) , _spots(std::move(Spots))
 {
-  // _spots_number = Spots.size();
-  // _spots = std::move(Spots);
   Caculate_features();
 }
 

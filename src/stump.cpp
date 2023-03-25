@@ -24,10 +24,10 @@ std::pair<double,std::vector<int>> stump::Train(const std::vector<segment>& segm
   
 
 }
-
-int stump::Predict(const segment&){
-  
-
+int stump::Predict(const segment& seg){
+  double t_feature{seg.Get_feature(_feature_type)};
+  if(t_feature >= _critical_point) return 1;
+  return -1;
 };
 
 void stump::try_point(double Critical_point , const std::vector<segment>& segments){
