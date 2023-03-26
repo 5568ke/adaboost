@@ -11,7 +11,7 @@ segment::segment(std::vector<spot>&& Spots)
   Caculate_features();
 }
 
-std::vector<spot> segment::Get_Spots(){
+const std::vector<spot> segment::Get_Spots()const{
   return _spots;
 }
 
@@ -25,7 +25,7 @@ void segment::Initialize_weight(double Weight){
   _weight=Weight;
 }
 
-spot segment::Get_mid_point(){
+const spot segment::Get_mid_point() const{
   if(_spots_number==1) return _spots[0];
   return _spots[_spots_number/2];
 }

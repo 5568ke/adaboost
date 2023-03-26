@@ -14,11 +14,11 @@ public:
   void Caculate_features();
   void Print_me();
   void Normolized(double);
-  spot Get_mid_point();
   double Modify_weight(double,int);
+  const spot Get_mid_point()const ;
   const double Get_weight() const;
   const double Get_feature(std::string) const;
-  std::vector<spot> Get_Spots();
+  const std::vector<spot> Get_Spots() const ;
   
 
 public:

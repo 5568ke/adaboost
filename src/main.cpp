@@ -1,4 +1,5 @@
 #include <fstream>
+#include <unordered_map>
 #include <mutex>
 #include <thread>
 #include <cmath>
@@ -16,16 +17,14 @@
 
 int main(){
 
-  // load all segment's data in to vector
+  // load train data and test data
   auto res = load_data();
   std::vector<segment> train_segments{res.first};
   std::vector<std::vector<segment>> test_segments{res.second}; 
-
   Normolized_data_weight(train_segments); 
   
   std::vector<WeakLearner> Chosen_WeakLearners;
   std::vector<std::string> Features{"spots_number","stand_deviation","width","circularity","radius"};
-  // std::vector<std::string> Features{"circularity"};
 
 
   int iterate_num,iterate_count{};
@@ -72,69 +71,15 @@ int main(){
   
   
   
-
+  // showing predict result : animation and confusion table
   int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
-
+  std::unordered_map<std::string,int> Predict_Result;
   for(auto & seg_vec : test_segments){
-    std::vector<double> Is_feet_vec_x;
-    std::vector<double> Is_feet_vec_y;
-    std::vector<double> Not_feet_vec_x;
-    std::vector<double> Not_feet_vec_y;
-    for(auto & seg : seg_vec){
-      double result{};
-      for(auto & classifier : Chosen_WeakLearners){
-        result+= classifier.Predict_if_is_feet(seg)*classifier.Amount_of_say;
-        // std::cout<< "result : "<<result<<std::endl;
-        // std::cout<< "point : "<<classifier.Get_point();
-        // std::cout<< "   Amount_of_say : "<<classifier.Amount_of_say<<std::endl;
-      }
-      if(seg.Is_feet==1){
-        if(result>0){
-          True_Positive++;
-          Is_feet_vec_x.push_back(seg.Get_mid_point().x);
-          Is_feet_vec_y.push_back(seg.Get_mid_point().y);
-        }
-        else{
-          Faulse_Positive++;
-          for(spot s :seg.Get_Spots()){
-            Not_feet_vec_x.push_back(s.x);
-            Not_feet_vec_y.push_back(s.y);
-          }
-        }
-      }else{
-        if(result>0){
-          Faulse_Negative++;
-          Is_feet_vec_x.push_back(seg.Get_mid_point().x);
-          Is_feet_vec_y.push_back(seg.Get_mid_point().y);
-        }
-        else{
-          True_Negative++;
-          for(spot s :seg.Get_Spots()){
-            Not_feet_vec_x.push_back(s.x);
-            Not_feet_vec_y.push_back(s.y);
-          }
-        }
-      }
-    }
-    matplotlibcpp::xlim(-5, 5);
-    matplotlibcpp::ylim(-5, 5);
-    matplotlibcpp::plot(Is_feet_vec_x, Is_feet_vec_y, "r*");  
-    matplotlibcpp::plot(Not_feet_vec_x, Not_feet_vec_y, "b*");  
-    matplotlibcpp::pause(0.05);
-    matplotlibcpp::clf();
-    matplotlibcpp::draw();
-
-
+    // this scope execute predict of one round(second) data
+    std::vector<double> Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y;
+    for(auto & seg : seg_vec)
+      Get_Predict_Result(seg,Predict_Result,Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y);
+    Show_Predict_Animation(Is_feet_vec_x, Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y);
   }
-  std::cout<<"True_Positive : "<<True_Positive<<std::endl;
-  std::cout<<"True_Negative : "<<True_Negative<<std::endl;
-  std::cout<<"Faulse_Positive : "<<Faulse_Positive<<std::endl;
-  std::cout<<"Faulse_Negative : "<<Faulse_Negative<<std::endl;
-  std::cout<<"precision : "<<(double)True_Positive/(True_Positive+Faulse_Positive)<<std::endl;
-  std::cout<<"recall : "<<(double)True_Positive/(True_Positive+Faulse_Negative)<<std::endl;
-
-  for(int i=0;i<60;i++){
-
-  }
-  
+  Show_Predict_Result(True_Positive,True_Negative,Faulse_Positive,Faulse_Negative);
 }

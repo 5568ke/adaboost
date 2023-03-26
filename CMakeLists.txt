@@ -7,13 +7,14 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native")
 
 add_executable(train
     ./include/segment.h
-    ./src/segment.cpp
     ./include/spot.h
     ./include/utility.h
+    ./src/segment.cpp
     ./src/spot.cpp
     ./src/main.cpp
     ./src/stump.cpp
     ./src/WeakLearner.h
+    ./src/utility.cpp
 )
 
 target_include_directories(train
