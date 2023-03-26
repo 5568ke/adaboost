@@ -9,6 +9,9 @@ stump::stump(std::string Feature_type)
 {
 }
 
+std::string stump::Get_Choose(){
+  return _greater_or_less;
+}
 
 int stump::Predict(const segment& seg){
   double t_feature{seg.Get_feature(_feature_type)};
@@ -36,7 +39,7 @@ std::pair<double,std::vector<int>> stump::Train(const std::vector<segment>& segm
   auto  it_pair=std::minmax_element(feature_vec.begin(),feature_vec.end());
   const double min=*(it_pair.first)/1.1,max=*(it_pair.second)*1.1;
   const double distance{max-min};
-  const int step_num=segments_number*100;
+  const int step_num=segments_number*10;
   const double step_size=distance/(step_num+1);
 
   for(double t_critical_point{min}; t_critical_point<max; t_critical_point+=step_size)

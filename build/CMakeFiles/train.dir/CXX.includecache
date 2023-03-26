@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/Label.h
-vector
--
-segment.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
-
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
 spot.h
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/spot.h
@@ -31,44 +25,6 @@ vector
 -
 segment.h
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
-
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/WeakLearner.h
-string
--
-iostream
--
-utility
--
-cmath
--
-../include/segment.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
-../include/stump.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/stump.h
-
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp
-fstream
--
-mutex
--
-thread
--
-cmath
--
-vector
--
-iostream
--
-../include/segment.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
-../include/spot.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/spot.h
-../include/Label.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/Label.h
-../include/stump.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/stump.h
-WeakLearner.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/WeakLearner.h
 
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/stump.cpp
 ../include/stump.h

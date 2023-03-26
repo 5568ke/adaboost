@@ -12,6 +12,7 @@ public:
   std::pair<double,std::vector<int>> Train(const std::vector<segment>&);
   int Predict(const segment&);
   std::string Get_Feature();
+  std::string Get_Choose();
 
 
 private:

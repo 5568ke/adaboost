@@ -23,6 +23,10 @@ public:
   {
     train(Segments,Feature_type);
   }
+
+  std::string Get_Choose(){
+    return _model.Get_Choose();
+  }
   
   void train(std::vector<segment>& Segments,std::string Feature){
     //res.first : prediect error rate

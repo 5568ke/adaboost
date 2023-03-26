@@ -133,6 +133,7 @@ int main(){
     // std::cout<<"final_max_r : "<<max_r<<std::endl;
     WeakLearners[max_r_index].been_chosen(segments);
     std::cout<<"Feature : "<<WeakLearners[max_r_index].Get_Feature()<<std::endl;
+    std::cout<<"greater or less : "<<WeakLearners[max_r_index].Get_Choose()<<std::endl;
     Chosen_WeakLearners.push_back(WeakLearners[max_r_index]);
     // for(auto& seg : segments){
     //   std::cout<<"weight : "<<seg.Get_weight()<<std::endl;
