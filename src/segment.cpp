@@ -11,6 +11,10 @@ segment::segment(std::vector<spot>&& Spots)
   Caculate_features();
 }
 
+std::vector<spot> segment::Get_Spots(){
+  return _spots;
+}
+
 void segment::Caculate_features(){
   caculate_standard_deviation();
   caculate_width();
@@ -19,6 +23,11 @@ void segment::Caculate_features(){
 
 void segment::Initialize_weight(double Weight){
   _weight=Weight;
+}
+
+spot segment::Get_mid_point(){
+  if(_spots_number==1) return _spots[0];
+  return _spots[_spots_number/2];
 }
 
 const double segment::Get_feature(std::string Feature_type) const{

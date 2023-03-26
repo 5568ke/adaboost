@@ -124,6 +124,7 @@ train: CMakeFiles/train.dir/src/spot.cpp.o
 train: CMakeFiles/train.dir/src/main.cpp.o
 train: CMakeFiles/train.dir/src/stump.cpp.o
 train: CMakeFiles/train.dir/build.make
+train: /usr/lib/x86_64-linux-gnu/libpython3.8.so
 train: CMakeFiles/train.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable train"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/train.dir/link.txt --verbose=$(VERBOSE)
