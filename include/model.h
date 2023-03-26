@@ -7,7 +7,6 @@
 class model{
 public:
   
-  model(std::string);
   virtual std::pair<double,std::vector<int>> Train(const std::vector<segment>&);
   virtual int Predict(const segment&);
 

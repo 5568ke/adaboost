@@ -204,6 +204,33 @@ src/spot.cpp.s:
 	$(MAKE) -f CMakeFiles/train.dir/build.make CMakeFiles/train.dir/src/spot.cpp.s
 .PHONY : src/spot.cpp.s
 
+src/stump.o: src/stump.cpp.o
+
+.PHONY : src/stump.o
+
+# target to build an object file
+src/stump.cpp.o:
+	$(MAKE) -f CMakeFiles/train.dir/build.make CMakeFiles/train.dir/src/stump.cpp.o
+.PHONY : src/stump.cpp.o
+
+src/stump.i: src/stump.cpp.i
+
+.PHONY : src/stump.i
+
+# target to preprocess a source file
+src/stump.cpp.i:
+	$(MAKE) -f CMakeFiles/train.dir/build.make CMakeFiles/train.dir/src/stump.cpp.i
+.PHONY : src/stump.cpp.i
+
+src/stump.s: src/stump.cpp.s
+
+.PHONY : src/stump.s
+
+# target to generate assembly for a file
+src/stump.cpp.s:
+	$(MAKE) -f CMakeFiles/train.dir/build.make CMakeFiles/train.dir/src/stump.cpp.s
+.PHONY : src/stump.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -222,6 +249,9 @@ help:
 	@echo "... src/spot.o"
 	@echo "... src/spot.i"
 	@echo "... src/spot.s"
+	@echo "... src/stump.o"
+	@echo "... src/stump.i"
+	@echo "... src/stump.s"
 .PHONY : help
 
 

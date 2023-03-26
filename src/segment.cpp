@@ -17,6 +17,10 @@ void segment::Caculate_features(){
   caculate_circularity_and_radius();
 }
 
+void segment::Initialize_weight(double Weight){
+  _weight=Weight;
+}
+
 const double segment::Get_feature(std::string Feature_type) const{
   if(Feature_type=="spots_number") return _spots_number;
   if(Feature_type=="stand_deviation") return _standard_deviation;
@@ -43,9 +47,10 @@ void segment::Print_me(){
 }
 
 double segment::Modify_weight(double Alpha , int Predict_result){
-  double offset = exp(Alpha) * Predict_result * Is_feet; 
-  _weight *= 1+offset; 
-  return 1+offset;
+  double ratio = exp(-Alpha * (double)Predict_result * (double)Is_feet) ; 
+  _weight *= ratio; 
+  // std::cout<<"weight : "<<_weight<<" correct or not : "<<Predict_result * Is_feet<<std::endl;
+  return _weight;
 }
 
 void segment::Normolized(double Weight_sum){

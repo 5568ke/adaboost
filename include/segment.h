@@ -10,6 +10,7 @@ class segment{
 public:
 
   segment(std::vector<spot>&&);
+  void Initialize_weight(double);
   void Caculate_features();
   void Print_me();
   void Normolized(double);

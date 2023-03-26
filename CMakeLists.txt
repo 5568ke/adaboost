@@ -13,6 +13,8 @@ add_executable(train
     ./include/spot.h
     ./src/spot.cpp
     ./src/main.cpp
+    ./src/stump.cpp
+    ./src/WeakLearner.h
 )
 
 target_include_directories(train
@@ -20,4 +22,8 @@ target_include_directories(train
         ${PROJECT_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}/ThirdParty
 )
+
+find_package(Threads REQUIRED)
+target_link_libraries(train Threads::Threads)
+
 
