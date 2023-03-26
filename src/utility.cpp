@@ -60,7 +60,7 @@ std::pair<std::vector<segment>,std::vector<std::vector<segment>>> load_data(){
   }
 
   //store all segments in to a one-dimension vector
-  for(int round{};round<60;round++)
+  for(int round{};round<1;round++)
     for(int index{};index<temp_segments[round].size();index++)
       train_segments.push_back(std::move(temp_segments[round][index]));
 
@@ -99,11 +99,11 @@ void Show_Predict_Animation(const std::vector<double>& Is_feet_vec_x,
     matplotlibcpp::draw();
 }
 
-void Show_Predict_Result(double True_Positive,
-                         double True_Negative,
-                         double Faulse_Positive,
-                         double Faulse_Negative
-                         ){
+void Show_Predict_Result(std::unordered_map<std::string,int>& Predict_Reuslt){
+  int True_Positive{Predict_Reuslt["True_Positive"]},
+      True_Negative{Predict_Reuslt["True_Negative"]},
+      Faulse_Positive{Predict_Reuslt["Faulse_Positive"]},
+      Faulse_Negative{Predict_Reuslt["Faulse_Negative"]};
   std::cout<<"True_Positive : "<<True_Positive<<std::endl;
   std::cout<<"True_Negative : "<<True_Negative<<std::endl;
   std::cout<<"Faulse_Positive : "<<Faulse_Positive<<std::endl;
@@ -117,13 +117,12 @@ void Get_Predict_Result(const segment& seg,
                         std::vector<double>& Is_feet_vec_x,
                         std::vector<double>& Is_feet_vec_y,
                         std::vector<double>& Not_feet_vec_x,
-                        std::vector<double>& Not_feet_vec_y
+                        std::vector<double>& Not_feet_vec_y,
+                        std::vector<WeakLearner>& Chosen_WeakLearners
                         ){
   double result{};
-  dict["True_Positive"]=1;
-  dict["True_Negative"]=1;
-  dict["Faulse_Positive"]=1;
-  dict["Faulse_Negative"]=1;
+  for(auto & classifier : Chosen_WeakLearners)
+    result+= classifier.Predict_if_is_feet(seg)*classifier.Amount_of_say;
   if(seg.Is_feet==1){
     if(result>0){
       dict["True_Positive"]++;

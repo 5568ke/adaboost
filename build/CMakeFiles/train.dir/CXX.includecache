@@ -67,6 +67,8 @@ unordered_map
 -
 ../include/segment.h
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
+../src/WeakLearner.h
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/WeakLearner.h
 
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/WeakLearner.h
 string
@@ -81,36 +83,6 @@ cmath
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
 ../include/stump.h
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/stump.h
-
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/main.cpp
-fstream
--
-unordered_map
--
-mutex
--
-thread
--
-cmath
--
-utility
--
-vector
--
-iostream
--
-../include/segment.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/segment.h
-../include/spot.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/spot.h
-../include/stump.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/stump.h
-../include/utility.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/utility.h
-WeakLearner.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/WeakLearner.h
-../include/matplotlibcpp.h
-/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/include/matplotlibcpp.h
 
 /home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/src/utility.cpp
 unordered_map
