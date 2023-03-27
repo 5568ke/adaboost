@@ -60,7 +60,7 @@ std::pair<std::vector<segment>,std::vector<std::vector<segment>>> load_data(){
   }
 
   //store all segments in to a one-dimension vector
-  for(int round{};round<1;round++)
+  for(int round{};round<60;round++)
     for(int index{};index<temp_segments[round].size();index++)
       train_segments.push_back(std::move(temp_segments[round][index]));
 
@@ -129,7 +129,7 @@ void Get_Predict_Result(const segment& seg,
       Is_feet_vec_x.push_back(seg.Get_mid_point().x);
       Is_feet_vec_y.push_back(seg.Get_mid_point().y);
     }else{
-      dict["Faulse_Positive"]++;
+      dict["Faulse_Negative"]++;
       for(spot s :seg.Get_Spots()){
         Not_feet_vec_x.push_back(s.x);
         Not_feet_vec_y.push_back(s.y);
@@ -137,7 +137,7 @@ void Get_Predict_Result(const segment& seg,
     }
   }else{
     if(result>0){
-      dict["Faulse_Negative"]++;
+      dict["Faulse_Positive"]++;
       Is_feet_vec_x.push_back(seg.Get_mid_point().x);
       Is_feet_vec_y.push_back(seg.Get_mid_point().y);
     }else{
