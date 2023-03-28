@@ -1,7 +1,7 @@
 # adaboost
 adaboost detect feet
 
-# Scitation
+# Citation
 This project uses the following two open source projects. 
 1. [Eigen3](https://eigen.tuxfamily.org/index.php?title=Main_Page)
 2. [Matplotlib-cpp](https://matplotlib-cpp.readthedocs.io/en/latest/)
