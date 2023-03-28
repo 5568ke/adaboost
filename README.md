@@ -13,11 +13,11 @@ sudo apt install cmake python3-dev python3-matplotlib python3-numpy
 
 # Compile & Usage
 ```bash=
-git clone https://github.com/NcuMathRoboticsLab/Leg-dataset-CXX-Version.git
-cd Leg-dataset-CXX-Version
+git clone git@github.com:5568ke/adaboost.git
+cd adaboost
 mkdir build
 cd build
 cmake ..
 cmake --build .
-./main
+./train
 ```
