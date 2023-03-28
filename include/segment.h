@@ -14,15 +14,14 @@ public:
   void Initialize_weight(double);
   void Caculate_features();
   void Caculate_features(spot,spot);
-  void Print_me();
   void Normolized(double);
   double Modify_weight(double,int);
-  const double Get_weight() const;
-  const double Get_feature(std::string) const;
-  const std::vector<spot> Get_Spots() const ;
-  const spot Get_mid_point()const ;
-  const spot Get_first_point()const ;
-  const spot Get_last_point()const  ;
+  const std::vector<spot> Get_Spots()const;
+  const double Get_weight()const;
+  const double Get_feature(std::string)const;
+  const spot Get_first_point()const;
+  const spot Get_mid_point()const;
+  const spot Get_last_point()const;
   
 
 public:

@@ -9,11 +9,6 @@
 segment::segment(std::vector<spot>&& Spots) 
 : _spots_number(Spots.size()) , _spots(std::move(Spots)) ,_circularity(0),_jump_distance_next(0),_jump_distance_prev(0)
 {
-  // Caculate_features();
-}
-
-const std::vector<spot> segment::Get_Spots()const{
-  return _spots;
 }
 
 void segment::Caculate_features(spot _prev_last_point,spot _next_first_point ){
@@ -35,9 +30,12 @@ void segment::Initialize_weight(double Weight){
   _weight=Weight;
 }
 
-const spot segment::Get_mid_point() const{
-  if(_spots_number==1) return _spots[0];
-  return _spots[_spots_number/2];
+const std::vector<spot> segment::Get_Spots()const{
+  return _spots;
+}
+
+const double segment::Get_weight() const{
+  return _weight;
 }
 
 const spot segment::Get_first_point() const{
@@ -47,6 +45,7 @@ const spot segment::Get_first_point() const{
 const spot segment::Get_last_point() const{
   return _spots[_spots_number-1];
 }
+
 const double segment::Get_feature(std::string Feature_type) const{
   if(Feature_type=="spots_number") return _spots_number;
   if(Feature_type=="stand_deviation") return _standard_deviation;
@@ -59,31 +58,11 @@ const double segment::Get_feature(std::string Feature_type) const{
   if(Feature_type=="linearity") return _linearity;
 }
 
-const double segment::Get_weight() const{
-  return _weight;
-}
 
-void segment::Print_me(){
-  for(auto& spot : _spots)
-    spot.Print_me();
-  std::cout<<"is feet : "<<Is_feet<<std::endl;
-  std::cout<<"spots_number : "<<_spots_number<<std::endl;
-  std::cout<<"stand_deviation : "<<_standard_deviation<<std::endl;
-  std::cout<<"width : "<<_width<<std::endl;
-  std::cout<<"circularity : "<<_circularity<<std::endl;
-  std::cout<<"radius : "<<_radius<<std::endl;
-  std::cout<<"distance : "<<_distance<<std::endl;
-  std::cout<<"jump_distance_next : "<<_jump_distance_next<<std::endl;
-  std::cout<<"jump_distance_prev : "<<_jump_distance_prev<<std::endl;
-  std::cout<<"linearity : "<<_linearity<<std::endl;
-
-  std::cout<<std::endl<<std::endl;
-}
 
 double segment::Modify_weight(double Alpha , int Predict_result){
   double ratio = exp(-Alpha * (double)Predict_result * (double)Is_feet) ; 
   _weight *= ratio; 
-  // std::cout<<"weight : "<<_weight<<" correct or not : "<<Predict_result * Is_feet<<std::endl;
   return _weight;
 }
 
@@ -116,6 +95,7 @@ void segment::caculate_width(){
     std::pow(_spots[_spots_number-1].y-_spots[0].y,2)  
   ); 
 }
+
 void segment::caculate_circularity_and_radius(){
   if(_spots_number==1 && Is_feet==1){
     _circularity=1;

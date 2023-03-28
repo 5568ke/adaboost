@@ -24,9 +24,9 @@ public:
     train(Segments,Feature_type);
   }
 
-  std::string Get_Choose(){
-    return _model.Get_Choose();
-  }
+  // std::string Get_Choose(){
+  //   return _model.Get_Choose();
+  // }
   
   void train(std::vector<segment>& Segments,std::string Feature){
     //res.first : prediect error rate
@@ -48,9 +48,9 @@ public:
     update_data_weight(Segments,std::move(_prediect_result));
   }
 
-  std::string Get_Feature(){
-    return _model.Get_Feature();
-  }
+  // std::string Get_Feature(){
+  //   return _model.Get_Feature();
+  // }
 
 
 
