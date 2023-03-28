@@ -92,8 +92,8 @@ void Show_Predict_Animation(const std::vector<double>& Is_feet_vec_x,
                             ){
     matplotlibcpp::xlim(-5, 5);
     matplotlibcpp::ylim(-5, 5);
-    matplotlibcpp::plot(Is_feet_vec_x, Is_feet_vec_y, "r*");  
-    matplotlibcpp::plot(Not_feet_vec_x, Not_feet_vec_y, "b*");  
+    matplotlibcpp::plot(Is_feet_vec_x, Is_feet_vec_y, "r.");  
+    matplotlibcpp::plot(Not_feet_vec_x, Not_feet_vec_y, "b.");  
     matplotlibcpp::pause(0.05);
     matplotlibcpp::clf();
     matplotlibcpp::draw();
