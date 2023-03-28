@@ -21,7 +21,7 @@ std::pair<std::vector<segment>,std::vector<std::vector<segment>>> load_data(){
   const double threshold=0.1;   //to be revised
   std::vector<segment> train_segments;
   std::vector<std::vector<segment>> test_segments;
-  std::vector<std::vector<segment>> temp_segments;    // this vector contains all segment in this round of datamain
+  std::vector<std::vector<segment>> temp_segments;    // this vector contains all segment in this round of data
   temp_segments.resize(120);
   for(int round{};round<120;round++){
     std::vector<spot> single_segment;
@@ -108,6 +108,7 @@ void Show_Predict_Result(std::unordered_map<std::string,int>& Predict_Reuslt){
   std::cout<<"True_Negative : "<<True_Negative<<std::endl;
   std::cout<<"Faulse_Positive : "<<Faulse_Positive<<std::endl;
   std::cout<<"Faulse_Negative : "<<Faulse_Negative<<std::endl;
+  std::cout<<"accuracy : "<<(double)(True_Positive+True_Negative)/(True_Positive+True_Negative+Faulse_Positive+Faulse_Negative)<<std::endl;
   std::cout<<"precision : "<<(double)True_Positive/(True_Positive+Faulse_Positive)<<std::endl;
   std::cout<<"recall : "<<(double)True_Positive/(True_Positive+Faulse_Negative)<<std::endl;
 }
@@ -126,20 +127,25 @@ void Get_Predict_Result(const segment& seg,
   if(seg.Is_feet==1){
     if(result>0){
       dict["True_Positive"]++;
-      Is_feet_vec_x.push_back(seg.Get_mid_point().x);
-      Is_feet_vec_y.push_back(seg.Get_mid_point().y);
+      for(spot s :seg.Get_Spots()){
+        Is_feet_vec_x.push_back(s.x);
+        Is_feet_vec_y.push_back(s.y);
+      }
     }else{
       dict["Faulse_Negative"]++;
       for(spot s :seg.Get_Spots()){
         Not_feet_vec_x.push_back(s.x);
         Not_feet_vec_y.push_back(s.y);
       }
-    }
-  }else{
+    } 
+  }
+  else{
     if(result>0){
       dict["Faulse_Positive"]++;
-      Is_feet_vec_x.push_back(seg.Get_mid_point().x);
-      Is_feet_vec_y.push_back(seg.Get_mid_point().y);
+      for(spot s :seg.Get_Spots()){
+        Is_feet_vec_x.push_back(s.x);
+        Is_feet_vec_y.push_back(s.y);
+      }
     }else{
       dict["True_Negative"]++;
       for(spot s :seg.Get_Spots()){

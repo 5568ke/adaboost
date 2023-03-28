@@ -9,6 +9,7 @@ add_executable(train
     ./include/segment.h
     ./include/spot.h
     ./include/utility.h
+    ./include/FWL.h
     ./src/segment.cpp
     ./src/spot.cpp
     ./src/main.cpp

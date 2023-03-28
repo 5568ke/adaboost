@@ -4,6 +4,7 @@
 #include<string>
 #include<vector>
 #include "segment.h"
+#include "FWL.h"
 
 class stump{
 public:
@@ -20,11 +21,11 @@ private:
   std::vector<int> _predict_result;
   double _critical_point;
   double _max_r;
-  int predict_with_point_less_than(const segment& , const int);
-  int predict_with_point_greater_than(const segment& , const int);
+  int predict_with_point_less_than(double , const double);
+  int predict_with_point_greater_than(double , const double);
   std::string _greater_or_less;
 private:
-  void try_point(double  , const std::vector<segment>& ,std::vector<int>&);
+  void try_point(double  , const std::vector<FWL>& ,std::vector<int>&);
   
 };
 
