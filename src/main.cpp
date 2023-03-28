@@ -28,7 +28,7 @@ int main(){
   Normolized_data_weight(train_segments); 
   
   std::vector<WeakLearner> Chosen_WeakLearners;
-  std::vector<std::string> Features{"distance","spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
+  std::vector<std::string> Features{"spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
   // for(segment& seg : train_segments)
     // if(seg.Is_feet==-1)
       // seg.Print_me();
