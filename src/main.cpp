@@ -83,7 +83,7 @@ int main(){
   auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 
 
-  std::cout<<" training use times : "<<elapsed.count() * 1e-9 <<std::endl<<std::endl<<std::endl;
+  std::cout<<" training use times : "<<elapsed.count() * 1e-9 <<std::endl;
 
  
   // showing predict result : animation and confusion table
@@ -109,6 +109,7 @@ int main(){
     //this function show the animation of prediction red means been predicted as feet blue mens not feet
     Show_Predict_Animation(Is_feet_vec_x, Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y);
   }
+  std::cout<<std::endl<<"                    RESULT"<<std::endl;
   Show_Predict_Result(t_Predict_Result,"training");
   Show_Predict_Result(Predict_Result,"test");
   
