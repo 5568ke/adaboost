@@ -36,6 +36,7 @@ int main(){
   int iterate_num,iterate_count{};
   std::cout<<"iterate times : "<<std::endl;
   std::cin>>iterate_num;
+  auto begin = std::chrono::high_resolution_clock::now();
   for(int i=0;i<iterate_num;i++){
     //iterate n times
     std::cout<<"iterate times : "<<++iterate_count<<std::endl;
@@ -69,8 +70,11 @@ int main(){
     }
     WeakLearners[max_r_index].been_chosen(train_segments);   // data's weight will be update in this function (using this weaklearner's alpha)
     Chosen_WeakLearners.push_back(WeakLearners[max_r_index]);
-
   }
+  auto end = std::chrono::high_resolution_clock::now();
+  auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+  std::cout<<"use time : "<<elapsed.count() * 1e-9<<std::endl;
+
 
   // showing predict result : animation and confusion table
   int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
