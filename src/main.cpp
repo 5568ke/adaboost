@@ -37,7 +37,7 @@ int main(){
 
   const int max_thread_num=std::thread::hardware_concurrency();
   int thread_num;
-  std::cout<<"support "<<max_thread_num<<" concurrent threads ";
+  std::cout<<"support "<<max_thread_num<<" concurrent threads "<<std::endl;
   std::cout<<" use thread numbers : ";
   std::cin>>thread_num;
   ThreadPool pool(thread_num);
@@ -97,7 +97,7 @@ int main(){
   auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 
 
-  std::cout<<"use times : "<<elapsed.count()<<std::endl;
+  std::cout<<"use times : "<<elapsed.count() * 1e-9 <<std::endl;
 
   // showing predict result : animation and confusion table
   int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
