@@ -36,21 +36,19 @@ int main(){
   const size_t Features_num=Features.size();
 
   const int max_thread_num=std::thread::hardware_concurrency();
+  const int iterate_times=1000;
   int thread_num;
-  std::cout<<"support "<<max_thread_num<<" concurrent threads "<<std::endl;
+  std::cout<<" support "<<max_thread_num<<" concurrent threads "<<std::endl;
   std::cout<<" use thread numbers : ";
   std::cin>>thread_num;
   ThreadPool pool(thread_num);
 
 
-  int iterate_num,iterate_count{};
-  std::cout<<"iterate times : "<<std::endl;
-  std::cin>>iterate_num;
 
+  std::cout<<" start training" <<std::endl;
   auto begin = std::chrono::high_resolution_clock::now();
-  for(int i=0;i<iterate_num;i++){
+  for(int i=0;i<iterate_times;i++){
     //iterate n times
-    std::cout<<"iterate times : "<<++iterate_count<<std::endl;
     std::vector<std::thread> training_workers;
     std::vector<WeakLearner> WeakLearners;
     std::mutex _m;
@@ -87,7 +85,18 @@ int main(){
   auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 
 
-  std::cout<<"use times : "<<elapsed.count() * 1e-9 <<std::endl;
+  std::cout<<" training use times : "<<elapsed.count() * 1e-9 <<std::endl<<std::endl<<std::endl;
+
+ 
+  // showing predict result : animation and confusion table
+  int t_True_Positive{},t_True_Negative{},t_Faulse_Positive{},t_Faulse_Negative{};
+  // this hash table store the predict result : true positive , true negative , faulse positive , faulse negative
+  std::unordered_map<std::string,int> t_Predict_Result;
+  std::vector<double> t_Is_feet_vec_x,t_Is_feet_vec_y,t_Not_feet_vec_x,t_Not_feet_vec_y;
+  for(auto & seg : train_segments)
+    Get_Predict_Result(seg,t_Predict_Result,t_Is_feet_vec_x,t_Is_feet_vec_y,t_Not_feet_vec_x,t_Not_feet_vec_y,Chosen_WeakLearners);
+  //this function show the animation of prediction red means been predicted as feet blue mens not feet
+
 
   // showing predict result : animation and confusion table
   int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
@@ -102,5 +111,7 @@ int main(){
     //this function show the animation of prediction red means been predicted as feet blue mens not feet
     Show_Predict_Animation(Is_feet_vec_x, Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y);
   }
-  Show_Predict_Result(Predict_Result);
+  Show_Predict_Result(t_Predict_Result,"training");
+  Show_Predict_Result(Predict_Result,"test");
+  
 }
