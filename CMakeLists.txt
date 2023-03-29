@@ -10,6 +10,7 @@ add_executable(train
     ./include/spot.h
     ./include/utility.h
     ./include/FWL.h
+    ./include/ThreadPool.h
     ./src/segment.cpp
     ./src/spot.cpp
     ./src/main.cpp

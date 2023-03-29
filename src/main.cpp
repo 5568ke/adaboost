@@ -11,6 +11,7 @@
 #include "../include/stump.h"
 #include "../include/utility.h"
 #include "../include/matplotlibcpp.h"
+#include "../include/ThreadPool.h"
 
 
 
@@ -32,6 +33,13 @@ int main(){
   std::vector<WeakLearner> Chosen_WeakLearners;
   const std::vector<std::string> Features{"distance","spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
 
+  const int max_thread_num=std::thread::hardware_concurrency();
+  int thread_num;
+  std::cout<<"support "<<max_thread_num<<" concurrent threads ";
+  std::cout<<" use thread numbers : ";
+  std::cin>>thread_num;
+  // ThreadPool pool(thread_num);
+
 
   int iterate_num,iterate_count{};
   std::cout<<"iterate times : "<<std::endl;
@@ -46,6 +54,12 @@ int main(){
     for(int index{};index<Features.size();index++){
     //for every feature train a weaklearner
       std::string feature{Features[index]};
+      // pool.enqueue([&,index,feature](){
+      //   WeakLearner t_WeakLearner(train_segments,feature);
+      //   std::lock_guard<std::mutex> lg(_m);    // STL isn't thread safe --> Lock  ,  push back isn't slow , so just spin
+      //   WeakLearners.push_back(t_WeakLearner);
+      // }); 
+
       training_workers.push_back(std::thread([&,index,feature](){
         WeakLearner t_WeakLearner(train_segments,feature);
         std::lock_guard<std::mutex> lg(_m);    // STL isn't thread safe --> Lock  ,  push back isn't slow , so just spin
@@ -53,9 +67,9 @@ int main(){
       }));
     }
     //wait all weaklearners' training been finished
-    for(auto & worker : training_workers)
-      if(worker.joinable())
-        worker.join();
+    // for(auto & worker : training_workers)
+    //   if(worker.joinable())
+    //     worker.join();
 
     //choose best weaklearner
     int max_r_index{};
@@ -69,8 +83,9 @@ int main(){
     }
     WeakLearners[max_r_index].been_chosen(train_segments);   // data's weight will be update in this function (using this weaklearner's alpha)
     Chosen_WeakLearners.push_back(WeakLearners[max_r_index]);
-
   }
+  // pool.stop();
+
 
   // showing predict result : animation and confusion table
   int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
