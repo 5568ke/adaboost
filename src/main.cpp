@@ -32,7 +32,7 @@ int main(){
 
   //this vector will store all weaklearners been chosen,and become the stronglearner
   std::vector<WeakLearner> Chosen_WeakLearners;
-  const std::vector<std::string> Features{"distance","spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
+  const std::vector<std::string> Features{"spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
   const size_t Features_num=Features.size();
   const int max_thread_num=std::thread::hardware_concurrency();
   const int iterate_times=1000;
