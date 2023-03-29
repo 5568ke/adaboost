@@ -35,7 +35,6 @@ public:
     is_closed_.store(true);
     cond_.notify_all();
   }
-    
 };
 
 class ThreadPool {
