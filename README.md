@@ -14,7 +14,7 @@ sudo apt install g++ cmake python3-dev python3-matplotlib python3-numpy
 
 # Compile & Usage
 ```bash=
-git clone git@github.com:5568ke/adaboost.git
+git clone https://github.com/5568ke/adaboost.git
 cd adaboost
 mkdir build
 cd build
