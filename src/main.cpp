@@ -5,6 +5,7 @@
 #include <cmath>
 #include <utility>
 #include <vector>
+#include <future>
 #include <iostream>
 #include "../include/segment.h"
 #include "../include/spot.h"
@@ -38,7 +39,7 @@ int main(){
   std::cout<<"support "<<max_thread_num<<" concurrent threads ";
   std::cout<<" use thread numbers : ";
   std::cin>>thread_num;
-  // ThreadPool pool(thread_num);
+  ThreadPool pool(thread_num);
 
 
   int iterate_num,iterate_count{};
@@ -51,54 +52,58 @@ int main(){
     std::vector<WeakLearner> WeakLearners;
     std::mutex _m;
 
+    std::vector<std::future<void>> signals(thread_num);
     for(int index{};index<Features.size();index++){
     //for every feature train a weaklearner
       std::string feature{Features[index]};
-      // pool.enqueue([&,index,feature](){
-      //   WeakLearner t_WeakLearner(train_segments,feature);
-      //   std::lock_guard<std::mutex> lg(_m);    // STL isn't thread safe --> Lock  ,  push back isn't slow , so just spin
-      //   WeakLearners.push_back(t_WeakLearner);
-      // }); 
-
-      training_workers.push_back(std::thread([&,index,feature](){
+      signals[index]=pool.enqueue([&,index,feature](){
+        std::cout<<"work"<<std::endl;
         WeakLearner t_WeakLearner(train_segments,feature);
         std::lock_guard<std::mutex> lg(_m);    // STL isn't thread safe --> Lock  ,  push back isn't slow , so just spin
         WeakLearners.push_back(t_WeakLearner);
-      }));
+      }); 
+
+      // training_workers.push_back(std::thread([&,index,feature](){
+      //   WeakLearner t_WeakLearner(train_segments,feature);
+      //   std::lock_guard<std::mutex> lg(_m);    // STL isn't thread safe --> Lock  ,  push back isn't slow , so just spin
+      //   WeakLearners.push_back(t_WeakLearner);
+      // }));
     }
-    //wait all weaklearners' training been finished
+    // for(std::future<void>& signal : signals)
+    //   signal.wait();
+    // wait all weaklearners' training been finished
     // for(auto & worker : training_workers)
     //   if(worker.joinable())
     //     worker.join();
 
     //choose best weaklearner
-    int max_r_index{};
-    double max_r{};
-    for(int index{};index<Features.size();index++){
-      // std::cout<<"feature : "<<WeakLearners[index].Get_Feature()<<" r : "<<WeakLearners[index].R<<std::endl;
-      if(WeakLearners[index].R > max_r){
-        max_r=WeakLearners[index].R;
-        max_r_index=index; 
-      }
-    }
-    WeakLearners[max_r_index].been_chosen(train_segments);   // data's weight will be update in this function (using this weaklearner's alpha)
-    Chosen_WeakLearners.push_back(WeakLearners[max_r_index]);
+    // int max_r_index{};
+    // double max_r{};
+    // for(int index{};index<Features.size();index++){
+    //   // std::cout<<"feature : "<<WeakLearners[index].Get_Feature()<<" r : "<<WeakLearners[index].R<<std::endl;
+    //   if(WeakLearners[index].R > max_r){
+    //     max_r=WeakLearners[index].R;
+    //     max_r_index=index; 
+    //   }
+    // }
+    // WeakLearners[max_r_index].been_chosen(train_segments);   // data's weight will be update in this function (using this weaklearner's alpha)
+    // Chosen_WeakLearners.push_back(WeakLearners[max_r_index]);
   }
-  // pool.stop();
+  pool.stop();
 
 
   // showing predict result : animation and confusion table
-  int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
-  // this hash table store the predict result : true positive , true negative , faulse positive , faulse negative
-  std::unordered_map<std::string,int> Predict_Result;
-  for(auto & seg_vec : test_segments){
-    // this scope execute predict of one one round(second) data
-    // these vector if for animation
-    std::vector<double> Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y;
-    for(auto & seg : seg_vec)
-      Get_Predict_Result(seg,Predict_Result,Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y,Chosen_WeakLearners);
-    //this function show the animation of prediction red means been predicted as feet blue mens not feet
-    Show_Predict_Animation(Is_feet_vec_x, Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y);
-  }
-  Show_Predict_Result(Predict_Result);
+  // int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
+  // // this hash table store the predict result : true positive , true negative , faulse positive , faulse negative
+  // std::unordered_map<std::string,int> Predict_Result;
+  // for(auto & seg_vec : test_segments){
+  //   // this scope execute predict of one one round(second) data
+  //   // these vector if for animation
+  //   std::vector<double> Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y;
+  //   for(auto & seg : seg_vec)
+  //     Get_Predict_Result(seg,Predict_Result,Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y,Chosen_WeakLearners);
+  //   //this function show the animation of prediction red means been predicted as feet blue mens not feet
+  //   Show_Predict_Animation(Is_feet_vec_x, Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y);
+  // }
+  // Show_Predict_Result(Predict_Result);
 }
