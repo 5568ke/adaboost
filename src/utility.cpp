@@ -1,4 +1,5 @@
-#include <unordered_map>
+#include<unordered_map>
+#include<thread>
 #include<vector>
 #include<fstream>
 #include<iostream>
@@ -101,18 +102,18 @@ void Show_Predict_Animation(const std::vector<double>& Is_feet_vec_x,
 
 void Show_Predict_Result(std::unordered_map<std::string,int>& Predict_Reuslt,std::string type){
   std::cout<<"===================================================="<<std::endl;
-  std::cout<<type<<" data's result : "<<std::endl;
+  std::cout<<" "<<type<<" data's result : "<<std::endl;
   int True_Positive{Predict_Reuslt["True_Positive"]},
       True_Negative{Predict_Reuslt["True_Negative"]},
       Faulse_Positive{Predict_Reuslt["Faulse_Positive"]},
       Faulse_Negative{Predict_Reuslt["Faulse_Negative"]};
-  std::cout<<"True_Positive : "<<True_Positive<<std::endl;
-  std::cout<<"True_Negative : "<<True_Negative<<std::endl;
-  std::cout<<"Faulse_Positive : "<<Faulse_Positive<<std::endl;
-  std::cout<<"Faulse_Negative : "<<Faulse_Negative<<std::endl;
-  std::cout<<"accuracy : "<<(double)(True_Positive+True_Negative)/(True_Positive+True_Negative+Faulse_Positive+Faulse_Negative)<<std::endl;
-  std::cout<<"precision : "<<(double)True_Positive/(True_Positive+Faulse_Positive)<<std::endl;
-  std::cout<<"recall : "<<(double)True_Positive/(True_Positive+Faulse_Negative)<<std::endl;
+  std::cout<<" True_Positive : "<<True_Positive<<std::endl;
+  std::cout<<" True_Negative : "<<True_Negative<<std::endl;
+  std::cout<<" Faulse_Positive : "<<Faulse_Positive<<std::endl;
+  std::cout<<" Faulse_Negative : "<<Faulse_Negative<<std::endl;
+  std::cout<<" Accuracy : "<<(double)(True_Positive+True_Negative)/(True_Positive+True_Negative+Faulse_Positive+Faulse_Negative)<<std::endl;
+  std::cout<<" Precision : "<<(double)True_Positive/(True_Positive+Faulse_Positive)<<std::endl;
+  std::cout<<" Recall : "<<(double)True_Positive/(True_Positive+Faulse_Negative)<<std::endl;
   std::cout<<"===================================================="<<std::endl;
 }
 
@@ -157,4 +158,63 @@ void Get_Predict_Result(const segment& seg,
       }
     }
   }
+}
+
+int UserIO(){
+// Get the maximum number of concurrent threads that can be run.
+  const int max_thread_num = std::thread::hardware_concurrency();
+  std::cout << std::endl<<" This machine supports up to " << max_thread_num << " concurrent threads." << std::endl;
+
+  // Ask the user how many threads they want to use.
+  int thread_num;
+  do {
+    std::cout << " How many threads do you want to use to train the classifier? (Enter a number between 1 and " << max_thread_num << "): ";
+    std::cin >> thread_num;
+    if (thread_num < 1 || thread_num > max_thread_num) {
+      std::cout << " Invalid input. Please enter a number between 1 and " << max_thread_num << "." << std::endl;
+    }
+  } while (thread_num < 1 || thread_num > max_thread_num);
+
+  std::cout << " You have chosen to use " << thread_num << " threads." << std::endl;
+  return thread_num;
+
+}
+
+std::vector<std::string> Get_features(){
+  return {"spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
+}
+
+int Get_iterate_times(){
+  return 1000;
+}
+
+void Show_Result_Message(std::vector<segment> train_segments,std::vector<std::vector<segment>> test_segments,std::vector<WeakLearner>& Chosen_WeakLearners,double elapsed){
+  // showing predict result : animation and confusion table
+  int t_True_Positive{},t_True_Negative{},t_Faulse_Positive{},t_Faulse_Negative{};
+  // this hash table store the predict result : true positive , true negative , faulse positive , faulse negative
+  std::unordered_map<std::string,int> t_Predict_Result;
+  std::vector<double> t_Is_feet_vec_x,t_Is_feet_vec_y,t_Not_feet_vec_x,t_Not_feet_vec_y;
+  for(auto & seg : train_segments)
+    Get_Predict_Result(seg,t_Predict_Result,t_Is_feet_vec_x,t_Is_feet_vec_y,t_Not_feet_vec_x,t_Not_feet_vec_y,Chosen_WeakLearners);
+  //this function show the animation of prediction red means been predicted as feet blue mens not feet
+
+
+  // showing predict result : animation and confusion table
+  int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
+  // this hash table store the predict result : true positive , true negative , faulse positive , faulse negative
+  std::unordered_map<std::string,int> Predict_Result;
+  std::cout<<" Showing predict result animation currently ...... "<<std::endl;
+  for(auto & seg_vec : test_segments){
+    // this scope execute predict of one one round(second) data
+    // these vector if for animation
+    std::vector<double> Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y;
+    for(auto & seg : seg_vec)
+      Get_Predict_Result(seg,Predict_Result,Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y,Chosen_WeakLearners);
+    //this function show the animation of prediction red means been predicted as feet blue mens not feet
+    Show_Predict_Animation(Is_feet_vec_x, Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y);
+  }
+  std::cout<<" The training process take "<<elapsed * 1e-9 <<" seconds "<<std::endl;
+  std::cout<<std::endl<<"                    RESULT"<<std::endl;
+  Show_Predict_Result(t_Predict_Result,"Training");
+  Show_Predict_Result(Predict_Result,"Test");
 }

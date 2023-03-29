@@ -18,7 +18,7 @@
 
 int main(){
 
-  // load train data and test data
+  // Load train data and test data
   auto res = load_data();
   std::vector<segment> train_segments{res.first};
   for(size_t index{1};index<train_segments.size()-1;index++)
@@ -28,32 +28,31 @@ int main(){
     for(size_t index{1};index<test_segs.size()-1;index++)
       test_segs[index].Caculate_features(test_segs[index-1].Get_last_point(),test_segs[index+1].Get_first_point());
   Normolized_data_weight(train_segments); 
-  
 
-  //this vector will store all weaklearners been chosen,and become the stronglearner
+  // This vector will store all weaklearners been chosen and become the stronglearner.
   std::vector<WeakLearner> Chosen_WeakLearners;
-  const std::vector<std::string> Features{"spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
-  const size_t Features_num=Features.size();
-  const int max_thread_num=std::thread::hardware_concurrency();
-  const int iterate_times=1000;
 
-  int thread_num;
-  std::cout<<" support "<<max_thread_num<<" concurrent threads "<<std::endl;
-  std::cout<<" use thread numbers : ";
-  std::cin>>thread_num;
-  ThreadPool pool(thread_num);
+  // Get features
+  const std::vector<std::string> Features{Get_features()};
+  const size_t Features_num = Features.size();
 
-  std::cout<<" start training" <<std::endl;
+  // Set up the thread pool with the chosen number of threads.
+  ThreadPool pool(UserIO());
+
+  const int iterate_times{Get_iterate_times()};
+  std::cout<<" Training process start currently ......" <<std::endl<<" Please wait for few seconds "<<std::endl;
   auto begin = std::chrono::high_resolution_clock::now();
   for(int i=0;i<iterate_times;i++){
-    //iterate n times
+    // Iterate n times
     std::vector<std::thread> training_workers;
     std::vector<WeakLearner> WeakLearners;
     std::mutex _m;
 
+    // This vector used to wait for every features' weaklearner training finished , so the iterations will be sequential
     std::vector<std::future<void>> signals(Features_num);
+
+    // For every feature train a weaklearner
     for(int index{};index<Features_num;index++){
-    //for every feature train a weaklearner
       std::string feature{Features[index]};
       signals[index]=pool.enqueue([&,index,feature](){
         WeakLearner t_WeakLearner(train_segments,feature);
@@ -61,56 +60,36 @@ int main(){
         WeakLearners.push_back(t_WeakLearner);
       }); 
     }
-    // wait all weaklearners' training been finished
+
+    // Wait all weaklearners' training been finished
     for(std::future<void>& signal : signals)
       signal.wait();
 
-    // choose best weaklearner
+    // Choose best weaklearner
     int max_r_index{};
     double max_r{};
     for(int index{};index<Features.size();index++){
-      // std::cout<<"feature : "<<WeakLearners[index].Get_Feature()<<" r : "<<WeakLearners[index].R<<std::endl;
       if(WeakLearners[index].R > max_r){
         max_r=WeakLearners[index].R;
         max_r_index=index; 
       }
     }
-    WeakLearners[max_r_index].been_chosen(train_segments);   // data's weight will be update in this function (using this weaklearner's alpha)
+
+    // Data's weight will be update in this function (using the chosen weaklearner's alpha)
+    WeakLearners[max_r_index].been_chosen(train_segments);       
+
+    // Put the chosen weaklearner (best accurency) in to the stronglearner 
     Chosen_WeakLearners.push_back(WeakLearners[max_r_index]);
+
+    // Go next iteration
   }
+  std::cout<<" Training process finished "<<std::endl;
+
+  // Finished training stop threadpool
   pool.stop();
   auto end = std::chrono::high_resolution_clock::now();
   auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 
-
-  std::cout<<" training use times : "<<elapsed.count() * 1e-9 <<std::endl;
-
- 
-  // showing predict result : animation and confusion table
-  int t_True_Positive{},t_True_Negative{},t_Faulse_Positive{},t_Faulse_Negative{};
-  // this hash table store the predict result : true positive , true negative , faulse positive , faulse negative
-  std::unordered_map<std::string,int> t_Predict_Result;
-  std::vector<double> t_Is_feet_vec_x,t_Is_feet_vec_y,t_Not_feet_vec_x,t_Not_feet_vec_y;
-  for(auto & seg : train_segments)
-    Get_Predict_Result(seg,t_Predict_Result,t_Is_feet_vec_x,t_Is_feet_vec_y,t_Not_feet_vec_x,t_Not_feet_vec_y,Chosen_WeakLearners);
-  //this function show the animation of prediction red means been predicted as feet blue mens not feet
-
-
-  // showing predict result : animation and confusion table
-  int True_Positive{},True_Negative{},Faulse_Positive{},Faulse_Negative{};
-  // this hash table store the predict result : true positive , true negative , faulse positive , faulse negative
-  std::unordered_map<std::string,int> Predict_Result;
-  for(auto & seg_vec : test_segments){
-    // this scope execute predict of one one round(second) data
-    // these vector if for animation
-    std::vector<double> Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y;
-    for(auto & seg : seg_vec)
-      Get_Predict_Result(seg,Predict_Result,Is_feet_vec_x,Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y,Chosen_WeakLearners);
-    //this function show the animation of prediction red means been predicted as feet blue mens not feet
-    Show_Predict_Animation(Is_feet_vec_x, Is_feet_vec_y,Not_feet_vec_x,Not_feet_vec_y);
-  }
-  std::cout<<std::endl<<"                    RESULT"<<std::endl;
-  Show_Predict_Result(t_Predict_Result,"training");
-  Show_Predict_Result(Predict_Result,"test");
-  
+  // Show all message
+  Show_Result_Message(train_segments,test_segments,Chosen_WeakLearners,elapsed.count());
 }
