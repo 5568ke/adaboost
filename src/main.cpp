@@ -64,19 +64,10 @@ int main(){
         std::lock_guard<std::mutex> lg(_m);    // STL isn't thread safe --> Lock  ,  push back isn't slow , so just spin
         WeakLearners.push_back(t_WeakLearner);
       }); 
-
-      // training_workers.push_back(std::thread([&,index,feature](){
-      //   WeakLearner t_WeakLearner(train_segments,feature);
-      //   std::lock_guard<std::mutex> lg(_m);    // STL isn't thread safe --> Lock  ,  push back isn't slow , so just spin
-      //   WeakLearners.push_back(t_WeakLearner);
-      // }));
     }
+    // wait all weaklearners' training been finished
     for(std::future<void>& signal : signals)
       signal.wait();
-    // wait all weaklearners' training been finished
-    // for(auto & worker : training_workers)
-    //   if(worker.joinable())
-    //     worker.join();
 
     // choose best weaklearner
     int max_r_index{};
