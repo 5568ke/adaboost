@@ -9,7 +9,7 @@ This project uses the following two open source projects.
 
 # Install Dependent
 ```bash=
-sudo apt install cmake python3-dev python3-matplotlib python3-numpy
+sudo apt install g++ cmake python3-dev python3-matplotlib python3-numpy
 ```
 
 # Compile & Usage
