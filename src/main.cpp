@@ -60,7 +60,6 @@ int main(){
     //for every feature train a weaklearner
       std::string feature{Features[index]};
       signals[index]=pool.enqueue([&,index,feature](){
-        std::cout<<"work"<<std::endl;
         WeakLearner t_WeakLearner(train_segments,feature);
         std::lock_guard<std::mutex> lg(_m);    // STL isn't thread safe --> Lock  ,  push back isn't slow , so just spin
         WeakLearners.push_back(t_WeakLearner);
