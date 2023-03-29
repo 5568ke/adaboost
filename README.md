@@ -1,5 +1,7 @@
 # adaboost
 adaboost detect feet
+<br>
+this branch use threadpool 
 
 # Citation
 This project uses the following two open source projects. 

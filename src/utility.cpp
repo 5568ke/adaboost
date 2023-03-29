@@ -99,7 +99,9 @@ void Show_Predict_Animation(const std::vector<double>& Is_feet_vec_x,
     matplotlibcpp::draw();
 }
 
-void Show_Predict_Result(std::unordered_map<std::string,int>& Predict_Reuslt){
+void Show_Predict_Result(std::unordered_map<std::string,int>& Predict_Reuslt,std::string type){
+  std::cout<<"===================================================="<<std::endl;
+  std::cout<<type<<" data's result : "<<std::endl;
   int True_Positive{Predict_Reuslt["True_Positive"]},
       True_Negative{Predict_Reuslt["True_Negative"]},
       Faulse_Positive{Predict_Reuslt["Faulse_Positive"]},
@@ -111,6 +113,7 @@ void Show_Predict_Result(std::unordered_map<std::string,int>& Predict_Reuslt){
   std::cout<<"accuracy : "<<(double)(True_Positive+True_Negative)/(True_Positive+True_Negative+Faulse_Positive+Faulse_Negative)<<std::endl;
   std::cout<<"precision : "<<(double)True_Positive/(True_Positive+Faulse_Positive)<<std::endl;
   std::cout<<"recall : "<<(double)True_Positive/(True_Positive+Faulse_Negative)<<std::endl;
+  std::cout<<"===================================================="<<std::endl;
 }
 
 void Get_Predict_Result(const segment& seg,
