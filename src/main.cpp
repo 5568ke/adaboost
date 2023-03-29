@@ -34,16 +34,14 @@ int main(){
   std::vector<WeakLearner> Chosen_WeakLearners;
   const std::vector<std::string> Features{"distance","spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
   const size_t Features_num=Features.size();
-
   const int max_thread_num=std::thread::hardware_concurrency();
   const int iterate_times=1000;
+
   int thread_num;
   std::cout<<" support "<<max_thread_num<<" concurrent threads "<<std::endl;
   std::cout<<" use thread numbers : ";
   std::cin>>thread_num;
   ThreadPool pool(thread_num);
-
-
 
   std::cout<<" start training" <<std::endl;
   auto begin = std::chrono::high_resolution_clock::now();
