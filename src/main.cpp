@@ -40,7 +40,7 @@ int main(){
   ThreadPool pool(UserIO());
 
   const int iterate_times{Get_iterate_times()};
-  std::cout<<" Training process start currently ......" <<std::endl<<" Please wait for few seconds "<<std::endl;
+  std::cout<<" Training process start currently ......" <<std::endl<<" Please wait for a few seconds "<<std::endl;
   auto begin = std::chrono::high_resolution_clock::now();
   for(int i=0;i<iterate_times;i++){
     // Iterate n times
