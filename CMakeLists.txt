@@ -13,7 +13,7 @@ add_executable(train
     ./include/ThreadPool.h
     ./src/segment.cpp
     ./src/spot.cpp
-    ./src/main.cpp
+    ./src/adaboost.cpp
     ./src/stump.cpp
     ./src/WeakLearner.h
     ./src/utility.cpp

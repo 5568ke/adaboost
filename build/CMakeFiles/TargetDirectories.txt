@@ -1,0 +1,3 @@
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles/rebuild_cache.dir
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles/edit_cache.dir
+/home/clown911026/cs/homework/機器人專題/第二次作業/adaboost/build/CMakeFiles/train.dir
