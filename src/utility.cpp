@@ -181,7 +181,7 @@ int UserIO(){
 }
 
 std::vector<std::string> Get_features(){
-  return {"spots_number","stand_deviation","width","circularity","radius","jump_distance_next","jump_distance_prev","linearity"};
+  return {"spots_number","stand_deviation","width","circularity","radius","jump_distance_next","distance","jump_distance_prev","linearity"};
 }
 
 int Get_iterate_times(){
