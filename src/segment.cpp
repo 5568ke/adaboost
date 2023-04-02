@@ -30,23 +30,23 @@ void segment::Initialize_weight(double Weight){
   _weight=Weight;
 }
 
-const std::vector<spot> segment::Get_Spots()const{
+std::vector<spot> segment::Get_Spots()const{
   return _spots;
 }
 
-const double segment::Get_weight() const{
+double segment::Get_weight() const{
   return _weight;
 }
 
-const spot segment::Get_first_point() const{
+spot segment::Get_first_point() const{
   return _spots[0];
 }
 
-const spot segment::Get_last_point() const{
+spot segment::Get_last_point() const{
   return _spots[_spots_number-1];
 }
 
-const double segment::Get_feature(std::string Feature_type) const{
+double segment::Get_feature(std::string Feature_type) const{
   if(Feature_type=="spots_number") return _spots_number;
   if(Feature_type=="stand_deviation") return _standard_deviation;
   if(Feature_type=="width") return _width;

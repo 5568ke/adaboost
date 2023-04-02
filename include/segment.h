@@ -16,12 +16,12 @@ public:
   void Caculate_features(spot,spot);
   void Normolized(double);
   double Modify_weight(double,int);
-  const std::vector<spot> Get_Spots()const;
-  const double Get_weight()const;
-  const double Get_feature(std::string)const;
-  const spot Get_first_point()const;
-  const spot Get_mid_point()const;
-  const spot Get_last_point()const;
+  std::vector<spot> Get_Spots()const;
+  double Get_weight()const;
+  double Get_feature(std::string)const;
+  spot Get_first_point()const;
+  spot Get_mid_point()const;
+  spot Get_last_point()const;
   
 
 public:
