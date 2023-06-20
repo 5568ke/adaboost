@@ -44,7 +44,6 @@ int main(){
   auto begin = std::chrono::high_resolution_clock::now();
   for(int i=0;i<iterate_times;i++){
     // Iterate n times
-    std::vector<std::thread> training_workers;
     std::vector<WeakLearner> WeakLearners;
     std::mutex _m;
 
